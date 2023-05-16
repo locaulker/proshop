@@ -68,6 +68,9 @@ const ProductScreen = () => {
           </Card>
         </Col>
       </Row>
+      <Link className="btn btn-dark my-3" to="/">
+        Go back
+      </Link>
     </>
   )
 }
