@@ -22,7 +22,8 @@
   "homepage": "https://github.com/locaulker/proshop#readme",
   "dependencies": {
     "dotenv": "^16.0.3",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "mongoose": "^7.1.1"
   },
   "devDependencies": {
     "concurrently": "^8.0.1",

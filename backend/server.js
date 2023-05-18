@@ -1,20 +1,24 @@
-import express from 'express'
-import dotenv from 'dotenv'
-import products from './data/products.js'
+import express from "express"
+import dotenv from "dotenv"
+import connectDB from "./config/db.js"
+
+import products from "./data/products.js"
 
 dotenv.config()
 
+connectDB()
+
 const app = express()
 
-app.get('/', (req, res) => {
-  res.send('API is running....')
+app.get("/", (req, res) => {
+  res.send("API is running....")
 })
 
-app.get('/api/v1/products', (req, res) => {
+app.get("/api/v1/products", (req, res) => {
   res.json(products)
 })
 
-app.get('/api/v1/products/:id', (req, res) => {
+app.get("/api/v1/products/:id", (req, res) => {
   const product = products.find(p => p._id === req.params.id)
   res.json(product)
 })
