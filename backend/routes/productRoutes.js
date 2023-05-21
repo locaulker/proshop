@@ -1,13 +1,13 @@
-import express from "express"
-import asyncHandler from "express-async-handler"
+import express from 'express'
+import asyncHandler from 'express-async-handler'
 const router = express.Router()
-import Product from "../models/productModel.js"
+import Product from '../models/productModel.js'
 
 // @desc      Fetch ALL products
 // @route     GET /api/v1/products
 // @access    Public
 router.get(
-  "/",
+  '/',
   asyncHandler(async (req, res) => {
     const products = await Product.find({})
 
@@ -19,7 +19,7 @@ router.get(
 // @route     GET /api/v1/products/:id
 // @access    Public
 router.get(
-  "/:id",
+  '/:id',
   asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id)
 
@@ -27,7 +27,7 @@ router.get(
       res.json(product)
     } else {
       res.status(404)
-      throw new Error("Product not found")
+      throw new Error('Product not found')
     }
   })
 )
