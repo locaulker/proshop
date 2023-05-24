@@ -1,17 +1,18 @@
-import React, { useEffect } from "react"
-import { Link, useParams, useLocation } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
-import { Row, Col, ListGroup, Image, Button, Card, Form } from "react-bootstrap"
-import Message from "../components/Message"
-import { addTocart } from "../actions/cartActions"
+import React, { useEffect } from 'react'
+import { Link, useParams, useLocation, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Row, Col, ListGroup, Image, Button, Card, Form } from 'react-bootstrap'
+import Message from '../components/Message'
+import { addTocart } from '../actions/cartActions'
 
 const CartScreen = () => {
   const params = useParams()
   let location = useLocation()
+  let navigate = useNavigate()
 
   const productId = params.id
 
-  const qty = location.search ? Number(location.search.split("=")[1]) : 1
+  const qty = location.search ? Number(location.search.split('=')[1]) : 1
 
   const dispatch = useDispatch()
 
@@ -25,11 +26,11 @@ const CartScreen = () => {
   }, [dispatch, productId, qty])
 
   const removeFromCartHandler = id => {
-    console.log("remove")
+    console.log('remove')
   }
 
   const checkoutHandler = () => {
-    console.log("Checkout")
+    navigate('/login?redirect=shipping')
   }
 
   return (
@@ -38,10 +39,10 @@ const CartScreen = () => {
         <h1>Shopping Cart</h1>
         {cartItems.length === 0 ? (
           <Message>
-            Your cart is empty <Link to="/">Go Back</Link>
+            Your cart is empty <Link to='/'>Go Back</Link>
           </Message>
         ) : (
-          <ListGroup variant="flush">
+          <ListGroup variant='flush'>
             {cartItems.map(item => (
               <ListGroup.Item key={item.product}>
                 <Row>
@@ -50,7 +51,7 @@ const CartScreen = () => {
                       src={item.image}
                       alt={item.name}
                       fluid
-                      round="true"
+                      round='true'
                     />
                   </Col>
                   <Col md={3}>
@@ -60,7 +61,7 @@ const CartScreen = () => {
                   <Col md={2}>
                     {
                       <Form.Control
-                        as="select"
+                        as='select'
                         value={item.qty}
                         onChange={e =>
                           dispatch(
@@ -78,11 +79,11 @@ const CartScreen = () => {
                   </Col>
                   <Col md={2}>
                     <Button
-                      type="button"
-                      variant="light"
+                      type='button'
+                      variant='light'
                       onClick={() => removeFromCartHandler(item.product)}
                     >
-                      <i className="fas fa-trash"></i>
+                      <i className='fas fa-trash'></i>
                     </Button>
                   </Col>
                 </Row>
@@ -93,7 +94,7 @@ const CartScreen = () => {
       </Col>
       <Col md={4}>
         <Card>
-          <ListGroup variant="flush">
+          <ListGroup variant='flush'>
             <ListGroup.Item>
               <h2>
                 Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
@@ -106,8 +107,8 @@ const CartScreen = () => {
             </ListGroup.Item>
             <ListGroup.Item>
               <Button
-                type="button"
-                className="btn-block"
+                type='button'
+                className='btn-block'
                 disabled={cartItems.length === 0}
                 onClick={checkoutHandler}
               >
